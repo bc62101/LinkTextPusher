@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Item {
 
     private String content;
+    private String source;
     private FirebaseUser user;
 
     public Item() {}
@@ -23,6 +24,10 @@ public class Item {
 
     public String getUserID(){
         return this.user.getDisplayName();
+    }
+
+    public String getSource(){
+        return "Source here";
     }
 
     public void setContent( String content ) {
