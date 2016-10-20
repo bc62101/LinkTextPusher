@@ -3,6 +3,13 @@ package edu.uga.bc62101.linktextpusher1;
 import android.content.Intent;
 import android.net.Uri;
 
+/**
+ * Item.java
+ * ---------
+ * Defines the template for messages and link items sent by the user.
+ * @author: Benson Chau
+ */
+
 import com.google.firebase.auth.FirebaseUser;
 
 public class Item {

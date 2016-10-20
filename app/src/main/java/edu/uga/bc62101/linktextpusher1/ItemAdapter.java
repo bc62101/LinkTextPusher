@@ -1,3 +1,10 @@
+/**
+ * ItemAdapter.java
+ * ----------------
+ * Defines and adds to the ListView the contents of Items.
+ * @author: Benson Chau
+ */
+
 package edu.uga.bc62101.linktextpusher1;
 
 import android.content.Context;
@@ -15,9 +22,28 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
     private ArrayList<Item> items;
 
-    public ItemAdapter(Context context, int textViewResourceId, ArrayList<Item> items ){
+    /**
+     * Adapter constructor without specifying the list of items to add to the new view.
+     * @param context Current state of the application.
+     * @param textViewResourceId ID of the particular layout to be used
+     */
+    public ItemAdapter( Context context, int textViewResourceId ){
+        super(context, textViewResourceId);
+    }
+
+    /**
+     * Adapter constructor specifying the list of items to add to the new view.
+     * @param context Current state of the application.
+     * @param textViewResourceId ID of the particular layout to be used.
+     * @param items List of items to populate the new view with.
+     */
+    public ItemAdapter( Context context, int textViewResourceId, ArrayList<Item> items ){
         super(context, textViewResourceId, items);
         this.items = items;
+    }
+
+    public void addItem(){
+
     }
 
     @Override

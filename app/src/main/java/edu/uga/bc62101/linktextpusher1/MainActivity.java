@@ -1,3 +1,10 @@
+/**
+ * MainActivity.java
+ * -----------------
+ * @author: Benson Chau
+ * Purpose: The core of the app; handles authentication, posts to database and removals.
+ */
+
 package edu.uga.bc62101.linktextpusher1;
 
 import android.content.Intent;
@@ -25,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
@@ -49,9 +58,14 @@ public class MainActivity extends AppCompatActivity {
             mUserId = mFirebaseUser.getUid();
 
             final ListView listView = (ListView) findViewById(R.id.listView);
+
             final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1,
                     android.R.id.text1);
+
+            final ItemAdapter adapter1 = new ItemAdapter(this,
+                    R.layout.list_item);
+
             listView.setAdapter(adapter);
 
             final EditText text = (EditText) findViewById(R.id.itemText);
@@ -74,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                             String itemContent = (String) dataSnapshot.child("content").getValue();
                             adapter.add(itemContent);
 
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemContent));
-                            startActivity(browserIntent);
+                            //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemContent));
+                            //startActivity(browserIntent);
                         }
 
                         @Override
@@ -151,10 +165,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     * Starts the login screen intent.
+     */
     private void loadLogInView() {
         Intent intent = new Intent(this, LogInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+
+
     }
+
 }
