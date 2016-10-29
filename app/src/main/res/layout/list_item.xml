@@ -37,8 +37,7 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10px"
-                android:textcolor="#0099CC" />
+                android:layout_marginLeft="10px" />
 
             <TextView
                 android:id="@+id/source"

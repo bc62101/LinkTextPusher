@@ -59,11 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
             final ListView listView = (ListView) findViewById(R.id.listView);
 
-            final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_list_item_1,
-                    android.R.id.text1);
-
-            final ItemAdapter adapter1 = new ItemAdapter(this,
+            final ItemAdapter adapter = new ItemAdapter(this,
                     R.layout.list_item);
 
             listView.setAdapter(adapter);
@@ -86,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                             String itemContent = (String) dataSnapshot.child("content").getValue();
-                            adapter.add(itemContent);
+                            Item item = new Item(itemContent, mFirebaseUser);
+
+                            adapter.add(item);
 
                             //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemContent));
                             //startActivity(browserIntent);
@@ -99,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onChildRemoved(DataSnapshot dataSnapshot) {
-                            adapter.remove((String) dataSnapshot.child("content").getValue());
+                            String itemContent = (String) dataSnapshot.child("content").getValue();
+                            Item item = new Item(itemContent, mFirebaseUser);
+                            adapter.remove(item);
                         }
 
                         @Override
@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
-
 
 
             listView.setOnItemClickListener( new AdapterView.OnItemClickListener(){

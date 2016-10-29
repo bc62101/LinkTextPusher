@@ -7,7 +7,9 @@
 
 package edu.uga.bc62101.linktextpusher1;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +22,8 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
 
-    private ArrayList<Item> items;
+    private LayoutInflater inflater;
+    private static ArrayList<Item> items = new ArrayList<>();
 
     /**
      * Adapter constructor without specifying the list of items to add to the new view.
@@ -29,6 +32,8 @@ public class ItemAdapter extends ArrayAdapter<Item> {
      */
     public ItemAdapter( Context context, int textViewResourceId ){
         super(context, textViewResourceId);
+        this.inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     /**
@@ -39,19 +44,34 @@ public class ItemAdapter extends ArrayAdapter<Item> {
      */
     public ItemAdapter( Context context, int textViewResourceId, ArrayList<Item> items ){
         super(context, textViewResourceId, items);
-        this.items = items;
+        this.inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void addItem(){
+    @Override
+    public int getCount() {
+        return items.size();
+    }
 
+    public void add( Item item ){
+        Log.w("ItemAdapter", "add");
+        items.add(item);
+        notifyDataSetChanged();
+    }
+
+    public void remove( Item item ){
+        Log.w("ItemAdapter", "remove");
+        items.remove(item);
+        notifyDataSetChanged();
     }
 
     @Override
     public View getView( int position, View convertView, ViewGroup parent ){
+        Log.w("ItemAdapter", "getView");
         View v = convertView;
+
         if( v == null ){
-            LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.list_item, null);
+            v = inflater.inflate(R.layout.list_item, null);
         }
 
         Item item = items.get(position);

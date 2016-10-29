@@ -18,7 +18,7 @@ public class Item {
     private String source;
     private FirebaseUser user;
 
-    public Item() {}
+    //public Item() {}
 
     public Item(String content, FirebaseUser user){
         this.content = content;
