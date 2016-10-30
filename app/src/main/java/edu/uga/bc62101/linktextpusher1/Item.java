@@ -37,8 +37,6 @@ public class Item {
         return "Source here";
     }
 
-    public void setContent( String content ) {
-        this.content = content;
-    }
+
 
 }
