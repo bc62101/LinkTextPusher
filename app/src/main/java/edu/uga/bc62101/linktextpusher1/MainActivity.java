@@ -97,9 +97,11 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onChildRemoved(DataSnapshot dataSnapshot) {
+                            /*
                             String itemContent = (String) dataSnapshot.child("content").getValue();
                             Item item = new Item(itemContent, mFirebaseUser);
                             adapter.remove(item);
+                            */
                         }
 
                         @Override
@@ -118,14 +120,18 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemClick( AdapterView<?> parent, View view, int position, long id ){
                     mDatabase.child("users").child(mUserId).child("items")
                             .orderByChild("content")
-                            .equalTo((String) listView.getItemAtPosition(position))
+                            //.equalTo((String) listView.getItemAtPosition(position))
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    /*
                                     if( dataSnapshot.hasChildren() ){
                                         DataSnapshot firstChild = dataSnapshot.getChildren().iterator().next();
                                         firstChild.getRef().removeValue();
                                     }
+                                    */
+
                                 }
 
                                 @Override

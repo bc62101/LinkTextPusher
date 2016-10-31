@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class ItemAdapter extends ArrayAdapter<Item> {
 
     private LayoutInflater inflater;
-    private static ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     /**
      * Adapter constructor without specifying the list of items to add to the new view.
@@ -82,7 +82,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
             TextView source = (TextView) v.findViewById(R.id.source);
 
             if( username != null ){
-                username.setText(item.getUserID());
+                username.setText(item.getUsername());
             }
 
             if( content != null ){

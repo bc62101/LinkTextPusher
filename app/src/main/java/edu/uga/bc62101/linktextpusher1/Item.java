@@ -29,7 +29,7 @@ public class Item {
         return content;
     }
 
-    public String getUserID(){
+    public String getUsername(){
         return this.user.getDisplayName();
     }
 
