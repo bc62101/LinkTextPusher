@@ -48,17 +48,29 @@ public class ItemAdapter extends ArrayAdapter<Item> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    /**
+     * Get the number of items in the listview.
+     * @return an int indicating the number of items in the listview.
+     */
     @Override
     public int getCount() {
         return items.size();
     }
 
+    /**
+     * Add an item to the list view.
+     * @param item that is added to the listview.
+     */
     public void add( Item item ){
         Log.w("ItemAdapter", "add");
         items.add(item);
         notifyDataSetChanged();
     }
 
+    /**
+     * Remove an item on the list view.
+     * @param item that should be removed from the listview.
+     */
     public void remove( Item item ){
         Log.w("ItemAdapter", "remove");
         items.remove(item);

@@ -74,8 +74,14 @@ public class MainActivity extends AppCompatActivity {
                     mDatabase.child("users").child(mUserId).child("items")
                             .push().child("content").setValue(item.getContent());
                     text.getText().clear();
+
+                    // TODO: If there is a link in content, open it with an intent.
+
+                    // TODO: Add listview animation when more items are added.
                 }
             });
+
+            // TODO: Connect users with each other in the database
 
             mDatabase.child("users").child(mUserId).child("items")
                     .addChildEventListener(new ChildEventListener() {
@@ -85,9 +91,6 @@ public class MainActivity extends AppCompatActivity {
                             Item item = new Item(itemContent, mFirebaseUser);
 
                             adapter.add(item);
-
-                            //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(itemContent));
-                            //startActivity(browserIntent);
                         }
 
                         @Override
