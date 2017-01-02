@@ -8,6 +8,8 @@ package edu.uga.bc62101.linktextpusher1;
 
 import android.content.Intent;
 import android.net.Uri;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 import com.google.firebase.auth.FirebaseUser;
 
@@ -45,8 +47,23 @@ public class Item {
      */
     // TODO: Parse content to find if it contains a link.
     public boolean isLink() {
+        try{
+            URL url = new URL(this.content);
+        } catch ( MalformedURLException e ){
+            return false;
+        }
+
         return true;
     }
+
+    /**
+     * Find and return the string of the link in the content string.
+     * @return the link as a string.
+     */
+    public Uri parseContent(){
+        return Uri.parse(this.content);
+    }
+
 
     /**
      * Get the username as a String.
@@ -69,15 +86,16 @@ public class Item {
      * @return an Intent that opens the content.
      */
     public Intent openLink() {
-        // TODO: Replace with a better way to parse content string
+        // TODO: Parse the content string to get the actual link.
+        if (isLink()) {
+            Uri link = parseContent();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
+            //startActivity(browserIntent);
 
-
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(this.content));
-        //startActivity(browserIntent);
-
-        return browserIntent;
+            return browserIntent;
+        } else {
+            return null;
+        }
     }
-
-
 
 }
