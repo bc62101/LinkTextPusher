@@ -22,6 +22,8 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
 
+    private static final String TAG = "ItemAdapter";
+
     private LayoutInflater inflater;
     private ArrayList<Item> items = new ArrayList<>();
 
@@ -62,7 +64,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
      * @param item that is added to the listview.
      */
     public void add( Item item ){
-        Log.w("ItemAdapter", "add");
+        Log.i(TAG, "add(item)");
         items.add(item);
         notifyDataSetChanged();
     }
@@ -72,14 +74,14 @@ public class ItemAdapter extends ArrayAdapter<Item> {
      * @param item that should be removed from the listview.
      */
     public void remove( Item item ){
-        Log.w("ItemAdapter", "remove");
+        Log.i(TAG, "remove(item)");
         items.remove(item);
         notifyDataSetChanged();
     }
 
     @Override
     public View getView( int position, View convertView, ViewGroup parent ){
-        Log.w("ItemAdapter", "getView");
+        Log.i(TAG, "getView()");
         View v = convertView;
 
         if( v == null ){
