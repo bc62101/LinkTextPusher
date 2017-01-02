@@ -14,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,15 +37,28 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabase;
     private String mUserId;
 
     @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause()");
+
+        // TODO: Add auto-login/remember me checkbox. If checked, login automatically. If not, log out on pause.
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -91,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             Item item = new Item(itemContent, mFirebaseUser);
 
                             adapter.add(item);
+                            Log.i(TAG, "Database child added");
                         }
 
                         @Override
@@ -105,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                             Item item = new Item(itemContent, mFirebaseUser);
                             adapter.remove(item);
                             */
+                            Log.i(TAG, "Database child removed");
                         }
 
                         @Override
@@ -127,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
+                                    // TODO: Allow users to edit data by clicking on it.
 
                                     /*
                                     if( dataSnapshot.hasChildren() ){
@@ -164,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             mFirebaseAuth.signOut();
             loadLogInView();
@@ -183,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
-
+        Log.d(TAG, "Loaded login view");
     }
 
 }
